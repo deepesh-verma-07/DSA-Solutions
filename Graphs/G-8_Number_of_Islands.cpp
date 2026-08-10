@@ -1,7 +1,7 @@
 class Solution {
 private:
     void bfs(int row, int col, vector<vector<int>> &vis, vector<vector<char>>& grid) {
-        vis[row][col] = 1;
+     vis[row][col] = 1;
         queue<pair<int,int>> q;
         q.push({row, col});
         int n = grid.size();
@@ -11,7 +11,7 @@ private:
             int row = q.front().first;
             int col = q.front().second;
             q.pop();
-
+ 
             // traverse in the neighbours and mark them if its a land
             for(int delrow = -1; delrow <= 1; delrow++) {
                 for(int delcol = -1; delcol <= 1; delcol++) {
