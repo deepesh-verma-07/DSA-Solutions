@@ -1,0 +1,48 @@
+class Solution {
+  public:
+    vector<int> safeNodes(int V, vector<vector<int>>& edges) {
+        // Code here
+        
+        vector<vector<int>> adj(V);
+               for(auto it : edges){
+                   int u = it[0];
+                   int v = it[1];
+                   // Here is the main concept that reverse the 
+                   //links and then do the operations
+                   adj[v].push_back(u);
+               }
+               
+        vector<int> indegree(V,0);
+                      for(auto i=0 ; i<V ; i++){
+                          for(auto it : adj[i]){
+                              indegree[it]++;
+                          }
+                      }
+
+               queue<int> q;
+                      for(auto i=0 ; i<V ; i++){
+                           if(indegree[i] == 0){
+                             q.push(i);
+                           }
+                      }
+
+                      vector<int> safe_nodes;
+                      while(!q.empty()){
+                          int node = q.front();
+
+                          q.pop();
+
+                          safe_nodes.push_back(node);
+
+                          for(auto it : adj[node]){
+                              indegree[it]--;
+                              if(indegree[it] == 0){
+                                  q.push(it);
+                              }
+                          }
+                      }
+                
+               sort(safe_nodes.begin(),safe_nodes.end());
+               return safe_nodes;
+    }
+};
